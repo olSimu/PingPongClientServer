@@ -1,0 +1,15 @@
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\bin\Debug\net6.0\serverPong.exe
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\bin\Debug\net6.0\serverPong.deps.json
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\bin\Debug\net6.0\serverPong.runtimeconfig.json
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\bin\Debug\net6.0\serverPong.dll
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\bin\Debug\net6.0\ref\serverPong.dll
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\bin\Debug\net6.0\serverPong.pdb
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.csproj.AssemblyReference.cache
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.GeneratedMSBuildEditorConfig.editorconfig
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.AssemblyInfoInputs.cache
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.AssemblyInfo.cs
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.csproj.CoreCompileInputs.cache
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.dll
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\ref\serverPong.dll
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.pdb
+C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.genruntimeconfig.cache
