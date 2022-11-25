@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\myFiles\\scuola\\progetto numeri\\serverPong\\serverPong\\serverPong.csproj": {}
+    "C:\\Users\\39328\\Desktop\\PingPongClientServer\\serverPong\\serverPong\\serverPong.csproj": {}
   },
   "projects": {
-    "C:\\myFiles\\scuola\\progetto numeri\\serverPong\\serverPong\\serverPong.csproj": {
+    "C:\\Users\\39328\\Desktop\\PingPongClientServer\\serverPong\\serverPong\\serverPong.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\myFiles\\scuola\\progetto numeri\\serverPong\\serverPong\\serverPong.csproj",
+        "projectUniqueName": "C:\\Users\\39328\\Desktop\\PingPongClientServer\\serverPong\\serverPong\\serverPong.csproj",
         "projectName": "serverPong",
-        "projectPath": "C:\\myFiles\\scuola\\progetto numeri\\serverPong\\serverPong\\serverPong.csproj",
+        "projectPath": "C:\\Users\\39328\\Desktop\\PingPongClientServer\\serverPong\\serverPong\\serverPong.csproj",
         "packagesPath": "C:\\Users\\39328\\.nuget\\packages\\",
-        "outputPath": "C:\\myFiles\\scuola\\progetto numeri\\serverPong\\serverPong\\obj\\",
+        "outputPath": "C:\\Users\\39328\\Desktop\\PingPongClientServer\\serverPong\\serverPong\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\39328\\AppData\\Roaming\\NuGet\\NuGet.Config",

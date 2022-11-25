@@ -47,13 +47,13 @@ def receiveMessage(paddles):
     while True:
         msg = client.recv(1024).decode(FORMAT)
         print(msg)
-        if(msg == "a_up<EOF>"):
+        if(msg == "a_up$"):
             paddles[0] = True
-        elif(msg == "a_down<EOF>"):
+        elif(msg == "a_down$"):
             paddles[1] = True
-        elif(msg == "b_up<EOF>"):
+        elif(msg == "b_up$"):
             paddles[2] = True
-        elif(msg == "b_down<EOF>"):
+        elif(msg == "b_down$"):
             paddles[3] = True
         print(paddles)
 
@@ -117,22 +117,22 @@ pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "norm
 
 #socket functions
 def socket_paddle_a_up():
-    msg = "a_up" + "<EOF>"
+    msg = "a_up" + "$"
     client.send(bytes(msg,FORMAT))
     #paddle_a_up()
 
 def socket_paddle_a_down():
-    msg = "a_down" + "<EOF>"
+    msg = "a_down" + "$"
     client.send(bytes(msg,FORMAT))
     #paddle_a_down()
 
 def socket_paddle_b_up():
-    msg = "b_up" + "<EOF>"
+    msg = "b_up" + "$"
     client.send(bytes(msg,FORMAT))
     #paddle_b_up()
 
 def socket_paddle_b_down():
-    msg = "b_down" + "<EOF>"
+    msg = "b_down" + "$"
     client.send(bytes(msg,FORMAT))
     #paddle_b_down()
 

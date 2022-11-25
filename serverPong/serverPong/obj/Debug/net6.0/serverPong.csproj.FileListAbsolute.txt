@@ -13,3 +13,18 @@ C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverP
 C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\ref\serverPong.dll
 C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.pdb
 C:\myFiles\scuola\progetto numeri\serverPong\serverPong\obj\Debug\net6.0\serverPong.genruntimeconfig.cache
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\bin\Debug\net6.0\serverPong.exe
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\bin\Debug\net6.0\serverPong.deps.json
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\bin\Debug\net6.0\serverPong.runtimeconfig.json
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\bin\Debug\net6.0\serverPong.dll
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\bin\Debug\net6.0\ref\serverPong.dll
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\bin\Debug\net6.0\serverPong.pdb
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\obj\Debug\net6.0\serverPong.csproj.AssemblyReference.cache
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\obj\Debug\net6.0\serverPong.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\obj\Debug\net6.0\serverPong.AssemblyInfoInputs.cache
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\obj\Debug\net6.0\serverPong.AssemblyInfo.cs
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\obj\Debug\net6.0\serverPong.csproj.CoreCompileInputs.cache
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\obj\Debug\net6.0\serverPong.dll
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\obj\Debug\net6.0\ref\serverPong.dll
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\obj\Debug\net6.0\serverPong.pdb
+C:\Users\39328\Desktop\PingPongClientServer\serverPong\serverPong\obj\Debug\net6.0\serverPong.genruntimeconfig.cache

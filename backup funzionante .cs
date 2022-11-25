@@ -57,19 +57,13 @@ public class SynchronousSocketListener
                 Socket handler = listener.Accept();
                 Socket handler2 = listener.Accept();
 
-                ClientManager clientThread = new ClientManager(handler, 1, handler2);
+                ClientManager clientThread = new ClientManager(handler, 1);
                 Thread t = new Thread(new ThreadStart(clientThread.doClient));
                 t.Start();
 
-                
-
-                ClientManager clientThread2 = new ClientManager(handler2, 2, handler);
+                ClientManager clientThread2 = new ClientManager(handler2, 2);
                 Thread t2 = new Thread(new ThreadStart(clientThread2.doClient));
                 t2.Start();
-
-                /*Thread listenerThread = new Thread(new ThreadStart(ListnerManager.doListener()));
-                listenerThread.Start();*/
-               
 
             }
 
@@ -97,27 +91,25 @@ public class ClientManager
 {
 
     Socket clientSocket;
-    Socket clientSocket2;
     byte[] bytes = new Byte[1024];
     String data = "";
     int role;
 
-    private static Queue<String> messaggiFrom1 =  new Queue<string>();
-    //private static List<String> messaggiTo1 = new List<String>();
+    private static List<String> messaggiFrom1=  new List<String>();
+    private static List<String> messaggiTo1 = new List<String>();
 
-    private static Queue<String> messaggiFrom2 = new Queue<String>();
-    //private static List<String> messaggiTo2 = new List<String>();
+    private static List<String> messaggiFrom2 = new List<String>();
+    private static List<String> messaggiTo2 = new List<String>();
 
-    public ClientManager(Socket clientSocket, int role, Socket clientSocket2)
+    public ClientManager(Socket clientSocket, int role)
     {
         this.clientSocket = clientSocket;
-        this.clientSocket2 = clientSocket2;
         this.role = role;
     }
 
     public void doClient()
     {
-        
+
         while (data != "Quit$")
         {
             // An incoming connection needs to be processed.  
@@ -126,52 +118,6 @@ public class ClientManager
             {
                 int bytesRec = clientSocket.Receive(bytes);
                 data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                //messaggi.Enqueue(data);
-            }
-            
-            
-
-            // Show the data on the console.  
-            Console.WriteLine("Messaggio ricevuto : {0}", data);
-
-            // Echo the data back to the client.  
-            byte[] msg = Encoding.ASCII.GetBytes(data);
-            clientSocket.Send(msg);
-            clientSocket2.Send(msg);
-
-        }
-        clientSocket.Shutdown(SocketShutdown.Both);
-        clientSocket.Close();
-        data = "";
-
-    }
-}
-
-/*
-public class ListnerManager
-{
-    Socket clientSocket;
-    byte[] bytes = new Byte[1024];
-    String data = "";
-    int role;
-
-    public ListnerManager(Socket clientSocket, int role)
-    {
-        this.clientSocket = clientSocket;
-        this.role = role;
-    }
-
-    public void doListener()
-    {
-        while (data != "Quit$")
-        {
-            // An incoming connection needs to be processed.  
-            data = "";
-            while (data.IndexOf("$") == -1)
-            {
-                int bytesRec = clientSocket.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                //messaggi.Enqueue(data);
             }
 
             // Show the data on the console.  
@@ -179,14 +125,12 @@ public class ListnerManager
 
             // Echo the data back to the client.  
             byte[] msg = Encoding.ASCII.GetBytes(data);
-            Thread t = new Thread(new ThreadStart(clientThread.doClient));
-            t.Start();
 
             clientSocket.Send(msg);
         }
         clientSocket.Shutdown(SocketShutdown.Both);
         clientSocket.Close();
         data = "";
+
     }
 }
-*/
