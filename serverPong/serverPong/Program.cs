@@ -1,75 +1,79 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
-
-public class Partita
-{
-    Socket a;
-    Socket b;
-    Partita(Socket a, Socket b)
-    {
-        this.a = a;
-        this.b = b;
-    }
-
-}
 
 public class SynchronousSocketListener
 {
 
-    // Incoming data from the client.  
+    // Dati provenienti dal client  
     public static string data = null;
 
     public static void StartListening()
     {
+        // Indirizzo ip e numero di porta di default
+        string tempIP = "127.0.0.1";
+        int tempPort = 5000;
+        string tempPortStr;
 
+        // Impostazione indirizzi
+        Console.WriteLine("Indirizzo IP di default: {0}", tempIP);
+        Console.WriteLine("Porta di default: {0}", tempPort);
 
-        // Establish the local endpoint for the socket.  
-        // Dns.GetHostName returns the name of the   
-        // host running the application.  
-        IPAddress ipAddress = System.Net.IPAddress.Parse("127.0.0.1");
-        IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 5000);
+        Console.WriteLine("Nuovo indirizzo IP: ");
+        tempIP = Console.ReadLine();
+        if (tempIP == "")
+            tempIP = "127.0.0.1";
 
-        //lista di sockets per gestire le partite
-        List <Partita> partita = new List <Partita>();
+        Console.WriteLine("Nuova porta: ");
+        tempPortStr = Console.ReadLine();
+        if (tempPortStr == "")
+            tempPort = 5000;
 
+        Console.WriteLine("Indirizzo IP: {0}", tempIP);
+        Console.WriteLine("Porta: {0}", tempPort);
 
-        // Create a TCP/IP socket.  
-        Socket listener = new Socket(ipAddress.AddressFamily,SocketType.Stream, ProtocolType.Tcp);
+        // Assegnazione indirizzi al seerver
+        IPAddress ipAddress = System.Net.IPAddress.Parse(tempIP);
+        IPEndPoint localEndPoint = new IPEndPoint(ipAddress, tempPort);
 
-        Console.WriteLine("Timeout : {0}", listener.ReceiveTimeout);
+        // crea la socket TCP/IP   
+        Socket listener = new Socket(ipAddress.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
 
-        // Bind the socket to the local endpoint and   
-        // listen for incoming connections.  
+        // Lega la socket al Endpoint locale e  
+        // ascolta le connessioni in entrata
         try
         {
             listener.Bind(localEndPoint);
             listener.Listen(10);
 
-            // Start listening for connections.  
+            // Inizia ad ascoltare le connessioni
             while (true)
             {
-
-                Console.WriteLine("Waiting for a connection...");
-                // Program is suspended while waiting for an incoming connection.  
+                // Il programma è sospeso durante l'attesa di una connessione in entrata
+                Console.WriteLine("Aspettando il primo player...");
                 Socket handler = listener.Accept();
+                Console.WriteLine("Aspettando il secondo player...");
                 Socket handler2 = listener.Accept();
 
-                ClientManager clientThread = new ClientManager(handler, 1, handler2);
+                // Avvia il Thread che gestitsce il primo Client
+                ClientManager clientThread = new ClientManager(handler, handler2);
                 Thread t = new Thread(new ThreadStart(clientThread.doClient));
                 t.Start();
+                Console.WriteLine("Player 1 partito");
 
-                
-
-                ClientManager clientThread2 = new ClientManager(handler2, 2, handler);
+                // Avvia il Thread che gestitsce il secondo Client
+                ClientManager clientThread2 = new ClientManager(handler2, handler);
                 Thread t2 = new Thread(new ThreadStart(clientThread2.doClient));
                 t2.Start();
+                Console.WriteLine("Player 2 partito");
 
-                /*Thread listenerThread = new Thread(new ThreadStart(ListnerManager.doListener()));
-                listenerThread.Start();*/
-               
+                // Avvia il Thread che si occupa della sincronizzazione
+                // dei due Client
+                Thread SYN = new(new ThreadStart(clientThread.syncronise));
+                SYN.Start();
+
+
+
 
             }
 
@@ -100,24 +104,36 @@ public class ClientManager
     Socket clientSocket2;
     byte[] bytes = new Byte[1024];
     String data = "";
-    int role;
 
-    private static Queue<String> messaggiFrom1 =  new Queue<string>();
-    //private static List<String> messaggiTo1 = new List<String>();
 
-    private static Queue<String> messaggiFrom2 = new Queue<String>();
-    //private static List<String> messaggiTo2 = new List<String>();
-
-    public ClientManager(Socket clientSocket, int role, Socket clientSocket2)
+    public ClientManager(Socket clientSocket, Socket clientSocket2)
     {
         this.clientSocket = clientSocket;
         this.clientSocket2 = clientSocket2;
-        this.role = role;
+    }
+
+    //metodo che manda un messaggio di sincronizzazione al client1
+    public void syncronise()
+    {
+
+        byte[] msg;
+        while (true)
+        {
+            Thread.Sleep(500);
+            data = "SYN$";
+            msg = Encoding.ASCII.GetBytes(data);
+            clientSocket.Send(msg);
+            data = "";
+        }
     }
 
     public void doClient()
     {
-        
+        // Avvia la partita sul Client dopo 5 Secondi
+        Thread.Sleep(5000);
+        byte[] msg = Encoding.ASCII.GetBytes("startGame$");
+        clientSocket.Send(msg);
+
         while (data != "Quit$")
         {
             // An incoming connection needs to be processed.  
@@ -126,20 +142,22 @@ public class ClientManager
             {
                 int bytesRec = clientSocket.Receive(bytes);
                 data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                //messaggi.Enqueue(data);
             }
-            
-            
 
-            // Show the data on the console.  
+            // mostra il messaggio ricevuto a console 
             Console.WriteLine("Messaggio ricevuto : {0}", data);
-
-            // Echo the data back to the client.  
-            byte[] msg = Encoding.ASCII.GetBytes(data);
+            string[] ss = data.Split(';');
+            if (ss[0] == "SYN")
+            {
+                data = "COOR" + ";" + ss[1] + ";" + ss[2] + ";" + ss[3] + ";" + ss[4];
+            }
+            // risponde con un messaggio al client  
+            msg = Encoding.ASCII.GetBytes(data);
             clientSocket.Send(msg);
             clientSocket2.Send(msg);
 
         }
+        //chiude la connessiome
         clientSocket.Shutdown(SocketShutdown.Both);
         clientSocket.Close();
         data = "";
@@ -147,46 +165,3 @@ public class ClientManager
     }
 }
 
-/*
-public class ListnerManager
-{
-    Socket clientSocket;
-    byte[] bytes = new Byte[1024];
-    String data = "";
-    int role;
-
-    public ListnerManager(Socket clientSocket, int role)
-    {
-        this.clientSocket = clientSocket;
-        this.role = role;
-    }
-
-    public void doListener()
-    {
-        while (data != "Quit$")
-        {
-            // An incoming connection needs to be processed.  
-            data = "";
-            while (data.IndexOf("$") == -1)
-            {
-                int bytesRec = clientSocket.Receive(bytes);
-                data += Encoding.ASCII.GetString(bytes, 0, bytesRec);
-                //messaggi.Enqueue(data);
-            }
-
-            // Show the data on the console.  
-            Console.WriteLine("Messaggio ricevuto : {0}", data);
-
-            // Echo the data back to the client.  
-            byte[] msg = Encoding.ASCII.GetBytes(data);
-            Thread t = new Thread(new ThreadStart(clientThread.doClient));
-            t.Start();
-
-            clientSocket.Send(msg);
-        }
-        clientSocket.Shutdown(SocketShutdown.Both);
-        clientSocket.Close();
-        data = "";
-    }
-}
-*/
