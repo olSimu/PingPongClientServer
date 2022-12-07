@@ -1,0 +1,3 @@
+socket
+threading
+PythonTurtle==0.3.2
