@@ -41,7 +41,8 @@ ball.shape("circle")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-
+ball.dx = 0.5
+ball.dy = 0.5
 
 
 # Pen(il testo in alto)
@@ -57,8 +58,16 @@ pen.write("Player A: 0  Player B: 0", align="center", font=("Courier", 24, "norm
 # Indirizzo IP e numero di porta di deault 
 SERVER = "127.0.0.1"
 PORT = 5000
-ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
+
+# Input indirizzo IP e porta
+SERVER = turtle.textinput("Pong", "indirizzo ip")
+PORT = int(turtle.textinput("Pong", "porta"))
+ADDR = (SERVER, PORT)
+
+#print(turtle.textinput("Pong", "indirizzo ip"))
+#print(turtle.textinput("Pong", "porta"))
+
 # Creazione socket
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDR)
@@ -69,9 +78,7 @@ paddles = [False, False, False, False]
 gameloop = [False]
 synCoor = [False]
 
-# Input indirizzo IP e porta
-SERVER = turtle.textinput("Pong", "indirizzo ip")
-PORT = turtle.textinput("Pong", "porta")
+
 
 # Funzioni di movimento delle paddle
 def paddle_a_up():

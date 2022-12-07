@@ -28,6 +28,8 @@ public class SynchronousSocketListener
         tempPortStr = Console.ReadLine();
         if (tempPortStr == "")
             tempPort = 5000;
+        else
+            tempPort = int.Parse(tempPortStr);
 
         Console.WriteLine("Indirizzo IP: {0}", tempIP);
         Console.WriteLine("Porta: {0}", tempPort);
